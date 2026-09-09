@@ -1,24 +1,24 @@
-# Rolex — Web3 Operator Portfolio
+# Rolex — Web3 Websites & Operations
 
-A focused Web3 work portfolio for pitching founders and developers who need community management, moderation, raid coordination, or a project website.
+A focused work portfolio for Web3 founders and developers.
 
-This site is intentionally separate from my general software-development portfolio.
+The portfolio leads with the part of my work that is easiest to judge on sight: **websites I have built for Web3 projects**. Community management, moderation and raid coordination are backed by original Telegram role and feedback screenshots inside the site.
 
-## What this portfolio proves
+## Featured builds
 
-- Admin, moderator, and raider roles in real Telegram communities
-- Direct founder/community-lead feedback from raid work
-- Completed paid raid/community work
-- Live Web3 project websites shipped from my GitHub
-- Technical range beyond landing pages through product-level Web3 builds
+- **Holding The Floor** — project website with an image meme generator
+- **PeePee** — PFP Lab + Meme Lab for generating community-ready images
+- **Shredded Cheez** — branded meme-project website with a playable mini-game
+- **Menace Shrek** — project website plus direct community-admin experience
 
-## Featured live work
+Each featured case study links to its GitHub repository as the stable source of proof. Old deployment aliases are intentionally not used here.
 
-- [Holding The Floor](https://holdingthefloor.vercel.app/)
-- [CHING CHING](https://ching-lyart.vercel.app/)
-- [Shredded Cheez](https://shred-three.vercel.app/)
-- [Menace Shrek](https://shrek-mocha.vercel.app/)
-- [SolIdentity](https://sol-identity.vercel.app/)
+## Other proof
+
+- Moderator, admin and raider roles in Telegram communities
+- Direct raid feedback and trust from project leads
+- Completed paid raid work
+- Product-level Web3 development through projects such as SolIdentity
 
 ## Contact
 
@@ -26,4 +26,4 @@ This site is intentionally separate from my general software-development portfol
 - X: [@rolexthexplorer](https://x.com/rolexthexplorer)
 - GitHub: [Rolexcode](https://github.com/Rolexcode)
 
-The portfolio uses original role screenshots and chat receipts as source proof. The visible card crops are intentionally framed around the useful signal — project name, role, trust, feedback, and payment — while the original screenshots remain inspectable from the site.
+Live portfolio: **https://rolexthexplorer.vercel.app/**
