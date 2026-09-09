@@ -1,108 +1,103 @@
-const ASSETS = window.PROOF_ASSETS || {};
+const cursor = document.querySelector('.cursor-light');
+window.addEventListener('pointermove', (event) => {
+  if (!cursor || window.matchMedia('(max-width: 640px)').matches) return;
+  cursor.style.transform = `translate(${event.clientX - 210}px, ${event.clientY - 210}px)`;
+}, { passive: true });
 
-document.querySelectorAll("[data-asset]").forEach((img)=>{
-  const key = img.dataset.asset;
-  if (ASSETS[key]) img.src = ASSETS[key];
-});
-
-document.querySelectorAll("[data-avatar]").forEach((img)=>{
-  if (window.ROLEX_AVATAR) img.src = window.ROLEX_AVATAR;
-});
-
-const glow = document.querySelector(".cursor-glow");
-window.addEventListener("pointermove", (e)=>{
-  if (!glow) return;
-  glow.style.transform = `translate(${e.clientX - 260}px, ${e.clientY - 260}px)`;
-},{passive:true});
-
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach((entry)=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    revealObserver.unobserve(entry.target);
   });
-},{threshold:.1});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+}, { threshold: 0.11 });
 
-document.querySelectorAll(".magnetic").forEach((el)=>{
-  el.addEventListener("pointermove",(e)=>{
-    const r=el.getBoundingClientRect();
-    const x=(e.clientX-r.left-r.width/2)*.07;
-    const y=(e.clientY-r.top-r.height/2)*.07;
-    el.style.transform=`translate(${x}px,${y}px)`;
-  });
-  el.addEventListener("pointerleave",()=>el.style.transform="");
-});
+document.querySelectorAll('.reveal').forEach((node) => revealObserver.observe(node));
 
-const proofCaptions = {
-  joe: "Joe Community Chat — Rolex shown with the Mod Joe role.",
-  menace: "Menace Shrek — Rolex shown as an Admin.",
-  stakrr: "Stakrr — Rolex shown with the Raider role.",
-  robbie: "$ROBBIE Community CTO — Rolex shown as an Admin.",
-  lib_praise: "Direct feedback after raid work: ‘Good work! Great job on raids.’",
-  joe_feedback: "Trust and raid feedback from the community lead, including ‘No need I trust you’ and ‘Very good.’",
-  lib_payment: "Paid work receipt: the client thanked Rolex, promised payment, and the chat shows payment received."
-};
-
-const modal = document.getElementById("proof-modal");
-const modalImg = document.getElementById("modal-image");
-const modalCaption = document.getElementById("modal-caption");
-
-document.querySelectorAll("[data-proof]").forEach((button)=>{
-  button.addEventListener("click",()=>{
-    const key=button.dataset.proof;
-    if (!ASSETS[key]) return;
-    modalImg.src=ASSETS[key];
-    modalCaption.textContent=proofCaptions[key] || "";
-    modal.showModal();
-  });
-});
-
-document.querySelector(".modal-close")?.addEventListener("click",()=>modal.close());
-modal?.addEventListener("click",(e)=>{
-  if(e.target===modal) modal.close();
-});
-
-const modes = {
-  community: {
-    number:"01 / 03",
-    title:"Enter the room before trying to change it.",
-    copy:"I learn the project voice, read how members behave, keep chat moving, remove noise and surface useful feedback back to the team.",
-    cta:"Talk community ops ↗",
-    timeline:[["CONTEXT","Understand the project, tone and rules"],["ROOM","Identify active members and recurring friction"],["OPERATE","Moderate, engage and keep information clean"],["REPORT","Surface what the team actually needs to know"]]
+const projects = {
+  floor: {
+    label: '01 / HOLDING THE FLOOR',
+    title: 'Holding The Floor',
+    image: 'https://raw.githubusercontent.com/Rolexcode/holdingthefloor/main/public/images/og-image.jpg',
+    description: 'A Web3 project site built to give the community something to do, not just something to read. The standout piece is an in-site image meme generator so members can make project-native content and take it straight back to the timeline.',
+    features: ['Web3 landing experience', 'Image meme generator', 'Community utility', 'Responsive interface'],
+    repo: 'https://github.com/Rolexcode/holdingthefloor'
   },
-  raid: {
-    number:"02 / 03",
-    title:"Coordinate attention without making it look automated.",
-    copy:"I set the angle, organize the people, keep replies varied and human, and make sure the raid creates momentum instead of a wall of copy-paste noise.",
-    cta:"Talk raid coordination ↗",
-    timeline:[["TARGET","Understand the post and the objective"],["ANGLE","Give raiders a direction, not a script"],["PUSH","Coordinate replies and keep quality up"],["REVIEW","See what landed and improve the next run"]]
+  peepee: {
+    label: '02 / PEEPEE',
+    title: 'PeePee',
+    image: 'https://raw.githubusercontent.com/Rolexcode/peepee/main/public/og-image.jpg',
+    description: 'A meme-project website where the creative tool is part of the product. The Meme Lab and PFP Lab let a user bring in a profile image, frame it, and generate 1080×1080 assets ready to post on X.',
+    features: ['PFP Lab', 'Meme Lab', '1080×1080 output', 'Image positioning controls'],
+    repo: 'https://github.com/Rolexcode/peepee'
   },
-  website: {
-    number:"03 / 03",
-    title:"Give the project somewhere worth sending traffic.",
-    copy:"I turn the project identity into a responsive Web3 site, wire the important links correctly, test the mobile experience and get the deployment live.",
-    cta:"Talk website ↗",
-    timeline:[["BRIEF","Identity, references, links and goal"],["BUILD","Responsive layout and interactions"],["CHECK","Test links, mobile and project details"],["SHIP","Deploy and hand over the live site"]]
+  shred: {
+    label: '03 / SHREDDED CHEEZ',
+    title: 'Shredded Cheez',
+    image: 'https://raw.githubusercontent.com/Rolexcode/shred/main/images/memes/original-shredded-banner.webp',
+    description: 'A meme-project website with a complete visual language, a meme gallery and its own playable mini-game. The point was to make visiting the site feel like entering the project’s joke instead of reading another token template.',
+    features: ['Playable mini-game', 'Meme gallery', 'Custom visual system', 'Responsive experience'],
+    repo: 'https://github.com/Rolexcode/shred'
+  },
+  shrek: {
+    label: '04 / MENACE SHREK',
+    title: 'Menace Shrek',
+    image: 'https://raw.githubusercontent.com/Rolexcode/shrek/main/image.png',
+    description: 'This one connects both sides of what I offer: I shipped the project website and also operated inside the Telegram community as an admin. The build and the community were not separate worlds to me.',
+    features: ['Project website', 'Web3 branding', 'Community admin', 'Mobile responsive'],
+    repo: 'https://github.com/Rolexcode/shrek'
   }
 };
 
-const modeNumber=document.querySelector(".mode-number");
-const modeTitle=document.getElementById("mode-title");
-const modeCopy=document.getElementById("mode-copy");
-const modeCta=document.getElementById("mode-cta");
-const modeTimeline=document.getElementById("mode-timeline");
+const caseModal = document.getElementById('case-modal');
+const caseImage = document.getElementById('case-image');
+const caseLabel = document.getElementById('case-label');
+const caseTitle = document.getElementById('case-title');
+const caseDescription = document.getElementById('case-description');
+const caseFeatures = document.getElementById('case-features');
+const caseRepo = document.getElementById('case-repo');
 
-document.querySelectorAll(".workflow-tab").forEach(tab=>{
-  tab.addEventListener("click",()=>{
-    document.querySelectorAll(".workflow-tab").forEach(t=>t.classList.remove("active"));
-    tab.classList.add("active");
-    const m=modes[tab.dataset.mode];
-    modeNumber.textContent=m.number;
-    modeTitle.textContent=m.title;
-    modeCopy.textContent=m.copy;
-    modeCta.textContent=m.cta;
-    modeTimeline.innerHTML=m.timeline.map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join("");
+function openProject(key) {
+  const project = projects[key];
+  if (!project || !caseModal) return;
+  caseImage.src = project.image;
+  caseImage.alt = `${project.title} project artwork`;
+  caseLabel.textContent = project.label;
+  caseTitle.textContent = project.title;
+  caseDescription.textContent = project.description;
+  caseFeatures.innerHTML = project.features.map((feature) => `<span>${feature}</span>`).join('');
+  caseRepo.href = project.repo;
+  caseModal.showModal();
+}
+
+document.querySelectorAll('[data-project]').forEach((button) => {
+  button.addEventListener('click', () => openProject(button.dataset.project));
+});
+
+document.querySelector('.modal-close')?.addEventListener('click', () => caseModal.close());
+caseModal?.addEventListener('click', (event) => {
+  if (event.target === caseModal) caseModal.close();
+});
+
+const proofModal = document.getElementById('proof-modal');
+const proofImage = document.getElementById('proof-modal-image');
+const proofTitle = document.getElementById('proof-modal-title');
+
+document.querySelectorAll('[data-proof-image]').forEach((button) => {
+  button.addEventListener('click', () => {
+    proofImage.src = button.dataset.proofImage;
+    proofTitle.textContent = button.dataset.proofTitle || 'Proof';
+    proofModal.showModal();
   });
+});
+
+document.querySelector('.proof-close')?.addEventListener('click', () => proofModal.close());
+proofModal?.addEventListener('click', (event) => {
+  if (event.target === proofModal) proofModal.close();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return;
+  if (caseModal?.open) caseModal.close();
+  if (proofModal?.open) proofModal.close();
 });
