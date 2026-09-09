@@ -1,0 +1,1 @@
+window.ROLEX_AVATAR="https://avatars.githubusercontent.com/u/119955307?v=4";
