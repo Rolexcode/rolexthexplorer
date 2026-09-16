@@ -3,215 +3,144 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0a0a09" />
-  <meta name="description" content="Rolex — websites, community management, moderation, raids and shilling for Web3 projects." />
+  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="description" content="Rolex — Web3 websites, community management, moderation, raids and shilling." />
   <meta property="og:title" content="Rolex — Web3 Operator" />
-  <meta property="og:description" content="Websites, Telegram management, moderation, raids and shilling for Web3 projects." />
+  <meta property="og:description" content="Websites, community management, moderation, raids and shilling for Web3 projects." />
   <title>Rolex — Web3 Operator</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    :root{--bg:#0b0b0c;--panel:#111113;--panel2:#151518;--text:#f4f2ec;--muted:#99999f;--line:#28282c;--accent:#b9ff66;--max:1180px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(circle at 13% 4%,rgba(110,91,255,.12),transparent 26%),radial-gradient(circle at 88% 22%,rgba(185,255,102,.06),transparent 24%)}body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E")}.shell{width:min(var(--max),calc(100% - 44px));margin:0 auto}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between}.identity{display:flex;align-items:center;gap:11px;font-weight:750;letter-spacing:-.02em}.identity img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid #34343a}.identity small{display:block;color:#7f7f87;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:1px}.nav-links{display:flex;gap:26px;color:#aaaab1;font-size:13px}.nav-links a{transition:.2s}.nav-links a:hover{color:#fff}.status{display:flex;align-items:center;gap:8px;color:#bfc0c5;font-size:12px}.status i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 16px rgba(185,255,102,.6)}
+    .hero{min-height:760px;display:grid;grid-template-columns:1.25fr .75fr;gap:90px;align-items:center;padding:96px 0 82px}.eyebrow{display:flex;align-items:center;gap:9px;color:#9c9ca4;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:750}.eyebrow:before{content:"";width:28px;height:1px;background:#5a5a61}.hero h1{font-size:clamp(58px,8vw,105px);line-height:.91;letter-spacing:-.072em;margin:24px 0 28px;max-width:850px}.hero h1 em{font-style:normal;color:#8e8e94}.hero-copy>p{font-size:18px;line-height:1.7;color:#a7a7ad;max-width:720px;margin:0}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}.btn{border:1px solid var(--line);padding:13px 17px;border-radius:999px;font-size:13px;font-weight:680;transition:.25s}.btn:hover{border-color:#58585f;transform:translateY(-2px)}.btn.primary{background:var(--text);color:#0c0c0d;border-color:var(--text)}.hero-side{align-self:end;padding-bottom:18px}.hero-side>span{font-size:10px;color:#6f6f77;letter-spacing:.15em;text-transform:uppercase}.service-list{margin-top:16px;border-top:1px solid var(--line)}.service-row{display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}.service-row b{font-size:14px}.service-row small{color:#6f6f77;font-size:11px}.service-row i{font-style:normal;color:#55555d}.manifesto{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:62px 0}.manifesto p{font-size:clamp(31px,4.3vw,58px);line-height:1.08;letter-spacing:-.05em;margin:0;max-width:1000px;color:#d7d5cf}.manifesto span{color:#77777e}
+    .section{padding:118px 0}.section-head{display:grid;grid-template-columns:.62fr 1.38fr;gap:60px;align-items:start;margin-bottom:54px}.section-label{font-size:10px;letter-spacing:.16em;color:#707078;text-transform:uppercase;font-weight:750;padding-top:10px}.section-title h2{font-size:clamp(42px,5.2vw,72px);line-height:.98;letter-spacing:-.057em;margin:0 0 18px}.section-title p{margin:0;color:#96969e;max-width:650px;line-height:1.7;font-size:15px}
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.project{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.28s}.project:hover{transform:translateY(-5px);border-color:#414147;background:#131316}.project.featured{grid-column:1/-1;display:grid;grid-template-columns:1.25fr .75fr}.project-media{position:relative;background:#080809;overflow:hidden;min-height:320px}.project-media img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}.project:hover .project-media img{transform:scale(1.025)}.project.featured .project-media{min-height:500px}.live-pill{position:absolute;left:14px;top:14px;background:rgba(10,10,11,.78);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(10px);border-radius:999px;padding:7px 10px;font-size:9px;letter-spacing:.12em;text-transform:uppercase}.project-copy{padding:25px}.project.featured .project-copy{display:flex;flex-direction:column;justify-content:flex-end;padding:34px}.project-type{font-size:9px;color:#72727a;letter-spacing:.15em;text-transform:uppercase;font-weight:750}.project h3{font-size:30px;letter-spacing:-.04em;margin:7px 0 12px}.project.featured h3{font-size:44px}.project p{margin:0;color:#9d9da5;line-height:1.65;font-size:14px}.project-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:21px}.project-tags span{border:1px solid #2c2c31;border-radius:999px;padding:6px 9px;color:#85858d;font-size:10px}.open-row{display:flex;align-items:center;justify-content:space-between;margin-top:26px;padding-top:17px;border-top:1px solid #252529;font-size:12px;font-weight:700}.open-row span{color:#6f6f77;font-weight:500}
+    .proof-section{background:#0e0e10;border-block:1px solid var(--line)}.proof-layout{display:grid;grid-template-columns:.76fr 1.24fr;gap:64px;align-items:start}.proof-copy{position:sticky;top:115px}.proof-copy h3{font-size:clamp(38px,4.7vw,62px);line-height:1;letter-spacing:-.055em;margin:13px 0 18px}.proof-copy p{color:#97979f;line-height:1.7;max-width:440px;margin:0}.proof-points{margin-top:30px}.proof-point{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line)}.proof-point b{font-size:12px;min-width:105px}.proof-point span{font-size:12px;color:#777780}.proof-sheet{display:block;background:#050506;border:1px solid #2a2a2f;border-radius:18px;padding:10px;transition:.25s}.proof-sheet:hover{border-color:#48484f}.proof-sheet img{width:100%;height:auto;border-radius:11px}.proof-sheet-note{display:flex;justify-content:space-between;gap:15px;color:#777780;font-size:10px;margin-top:10px;padding:0 3px;text-transform:uppercase;letter-spacing:.1em}.proof-sheet+.proof-sheet{margin-top:18px}
+    .raid-block{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}.raid-block .proof-sheet{max-width:560px}.quote-stack{display:grid;gap:13px}.quote{border-top:1px solid var(--line);padding:20px 0}.quote small{color:#6f6f77;font-size:9px;letter-spacing:.15em;text-transform:uppercase}.quote strong{display:block;font-size:27px;letter-spacing:-.03em;line-height:1.25;margin-top:8px}.quote p{color:#8e8e96;line-height:1.6;margin:8px 0 0;font-size:13px}
+    .contact{padding:110px 0 130px}.contact-card{border-top:1px solid var(--line);padding-top:50px;display:grid;grid-template-columns:1.25fr .75fr;gap:70px}.contact h2{font-size:clamp(48px,7vw,92px);line-height:.92;letter-spacing:-.065em;margin:0}.contact h2 span{color:#77777e}.contact-side p{margin:0 0 22px;color:#9999a1;line-height:1.7}.contact-links{display:grid;gap:8px}.contact-links a{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-top:1px solid var(--line);font-size:13px}.contact-links a:last-child{border-bottom:1px solid var(--line)}.contact-links strong{font-size:14px}.footer{height:90px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;color:#696970;font-size:11px}.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;min-height:auto;gap:60px;padding:80px 0 70px}.hero-side{max-width:620px}.section-head{grid-template-columns:1fr;gap:14px}.projects{grid-template-columns:1fr}.project.featured{grid-column:auto;display:block}.project.featured .project-media{min-height:340px}.project.featured h3{font-size:31px}.proof-layout{grid-template-columns:1fr;gap:35px}.proof-copy{position:static}.raid-block{grid-template-columns:1fr}.contact-card{grid-template-columns:1fr;gap:45px}}
+    @media(max-width:620px){.shell{width:min(var(--max),calc(100% - 28px))}.nav{height:66px}.nav-links{display:none}.status{font-size:10px}.hero{padding-top:64px}.hero h1{font-size:58px}.hero-copy>p{font-size:16px}.hero-actions{align-items:stretch}.btn{font-size:12px}.manifesto{padding:46px 0}.manifesto p{font-size:34px}.section{padding:88px 0}.section-title h2{font-size:46px}.project-media,.project.featured .project-media{min-height:260px}.project-copy,.project.featured .project-copy{padding:21px}.project h3,.project.featured h3{font-size:29px}.proof-sheet{padding:6px;border-radius:13px}.proof-sheet img{border-radius:8px}.quote strong{font-size:23px}.contact{padding:90px 0 105px}.contact h2{font-size:58px}.footer{height:auto;padding:28px 0;gap:14px;align-items:flex-start;flex-direction:column}}
+  </style>
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-
-  <header class="site-header">
+  <header class="nav-wrap">
     <nav class="nav shell">
-      <a class="identity" href="#top" aria-label="Rolex home">
+      <a class="identity" href="#top">
         <img src="./assets/profile.jpg" alt="Rolex" />
-        <span>Rolex</span>
+        <div><span>Rolex</span><small>@rolexthexplorer</small></div>
       </a>
-      <div class="nav-links">
-        <a href="#websites">Websites</a>
-        <a href="#community">Community</a>
-        <a href="#raids">Raids</a>
-        <a href="#contact">Contact</a>
-      </div>
+      <div class="nav-links"><a href="#websites">Websites</a><a href="#community">Community</a><a href="#raids">Raids</a><a href="#contact">Contact</a></div>
+      <div class="status"><i></i> Available for Web3 work</div>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero shell">
       <div class="hero-copy reveal">
-        <div class="eyebrow"><i></i> AVAILABLE FOR WEB3 WORK</div>
-        <h1>Need hands on your Web3 project? <span>I can plug in.</span></h1>
-        <p>I’m Rolex. I build websites for Web3 and memecoin projects, manage and moderate Telegram communities, and handle raids & shilling on X. If one part of the project needs attention, I don’t need to be boxed into one role.</p>
+        <div class="eyebrow">Web3 operator</div>
+        <h1>I help projects <span>ship, stay active</span> and get seen.</h1>
+        <p>I build websites for Web3 and memecoin projects, manage and moderate Telegram communities, and coordinate raids & shills on X. If your team needs another pair of hands, I can plug in where the pressure is.</p>
         <div class="hero-actions">
-          <a class="button button-light" href="#websites">See what I’ve done ↓</a>
-          <a class="button" href="https://t.me/rolexthexplorer" target="_blank" rel="noreferrer">Telegram ↗</a>
-          <a class="button" href="https://x.com/rolexthexplorer" target="_blank" rel="noreferrer">X ↗</a>
+          <a class="btn primary" href="#websites">See the work ↓</a>
+          <a class="btn" href="https://t.me/rolexthexplorer" target="_blank" rel="noreferrer">Telegram ↗</a>
+          <a class="btn" href="https://x.com/rolexthexplorer" target="_blank" rel="noreferrer">X ↗</a>
         </div>
       </div>
+      <aside class="hero-side reveal">
+        <span>What I can handle</span>
+        <div class="service-list">
+          <div class="service-row"><small>01</small><b>Project websites</b><i>↗</i></div>
+          <div class="service-row"><small>02</small><b>Community management</b><i>↗</i></div>
+          <div class="service-row"><small>03</small><b>Moderation</b><i>↗</i></div>
+          <div class="service-row"><small>04</small><b>Raids & shilling</b><i>↗</i></div>
+        </div>
+      </aside>
+    </section>
 
-      <div class="hero-services reveal">
-        <div><strong>Websites</strong><p>Project sites with the usual essentials — plus things like meme generators, mini-games and community tools when the idea calls for it.</p></div>
-        <div><strong>Community management</strong><p>Keep Telegram moving, answer questions, post updates and make sure the community doesn’t feel abandoned.</p></div>
-        <div><strong>Moderation</strong><p>Handle spam, scams and day-to-day noise without turning the group into a dead, over-moderated chat.</p></div>
-        <div><strong>Raids & shilling</strong><p>Coordinate replies and shills on X so the project gets seen without every account sounding copy-pasted.</p></div>
-      </div>
+    <section class="manifesto">
+      <div class="shell reveal"><p>A good Web3 hire should make the project easier to run. <span>I can handle the site, work inside the community, and help push the project when it needs visibility.</span></p></div>
     </section>
 
     <section class="section shell" id="websites">
       <header class="section-head reveal">
-        <span>WEBSITES</span>
-        <div>
-          <h2>Some Web3 sites I’ve shipped.</h2>
-          <p>I don’t like swapping a token name into the same template and calling it a day. When it fits the project, I add something the community can actually use, play with or share.</p>
-        </div>
+        <span class="section-label">01 / Websites</span>
+        <div class="section-title"><h2>Sites I’ve built for projects.</h2><p>Not just a CA, socials and a buy button. I like giving the website something the community can actually use — a meme tool, a mini-game, a content feature — when the project calls for it.</p></div>
       </header>
 
       <div class="projects">
-        <a class="project-card project-featured reveal" href="https://holdingthefloor.vercel.app" target="_blank" rel="noreferrer">
-          <div class="project-preview">
-            <div class="browser-bar"><i></i><i></i><i></i><span>holdingthefloor.vercel.app</span></div>
-            <img src="https://raw.githubusercontent.com/Rolexcode/holdingthefloor/main/public/images/floor-gang-comic.jpg" referrerpolicy="no-referrer" alt="Holding The Floor project preview" loading="lazy" />
-            <div class="project-open">Open live site ↗</div>
-          </div>
-          <div class="project-info">
-            <div><span class="project-type">MEMECOIN WEBSITE</span><h3>Holding The Floor</h3></div>
-            <p>The site has its own meme-image generator, so holders can make project-branded content and take it straight back to X.</p>
-            <div class="project-tags"><span>Meme generator</span><span>Community content</span></div>
-          </div>
+        <a class="project featured reveal" href="https://holdingthefloor.vercel.app" target="_blank" rel="noreferrer">
+          <div class="project-media"><img src="https://raw.githubusercontent.com/Rolexcode/holdingthefloor/main/public/images/floor-gang-comic.jpg" alt="Holding The Floor website preview" loading="lazy"><span class="live-pill">Live project</span></div>
+          <div class="project-copy"><span class="project-type">Memecoin website</span><h3>Holding The Floor</h3><p>Built with a meme-image generator so holders can create project content and take it straight back to X.</p><div class="project-tags"><span>Meme generator</span><span>Community content</span></div><div class="open-row"><span>holdingthefloor.vercel.app</span><b>Open site ↗</b></div></div>
         </a>
 
-        <a class="project-card reveal" href="https://peepeecto.vercel.app" target="_blank" rel="noreferrer">
-          <div class="project-preview">
-            <div class="browser-bar"><i></i><i></i><i></i><span>peepeecto.vercel.app</span></div>
-            <img src="https://raw.githubusercontent.com/Rolexcode/peepee/main/public/og-image.jpg" referrerpolicy="no-referrer" alt="PeePee project preview" loading="lazy" />
-            <div class="project-open">Open live site ↗</div>
-          </div>
-          <div class="project-info">
-            <div><span class="project-type">MEMECOIN WEBSITE</span><h3>PeePee</h3></div>
-            <p>I built a PFP + Meme Lab into the site so the community can turn their own pictures into ready-to-post project memes.</p>
-            <div class="project-tags"><span>PFP tool</span><span>Meme lab</span></div>
-          </div>
+        <a class="project reveal" href="https://peepeecto.vercel.app" target="_blank" rel="noreferrer">
+          <div class="project-media"><img src="https://raw.githubusercontent.com/Rolexcode/peepee/main/public/og-image.jpg" alt="PeePee website preview" loading="lazy"><span class="live-pill">Live project</span></div>
+          <div class="project-copy"><span class="project-type">Memecoin website</span><h3>PeePee</h3><p>A PFP + Meme Lab built into the project site so the community can turn their own pictures into ready-to-post content.</p><div class="project-tags"><span>PFP tool</span><span>Meme lab</span></div><div class="open-row"><span>peepeecto.vercel.app</span><b>Open site ↗</b></div></div>
         </a>
 
-        <a class="project-card reveal" href="https://shreddedcheez.vercel.app/" target="_blank" rel="noreferrer">
-          <div class="project-preview">
-            <div class="browser-bar"><i></i><i></i><i></i><span>shreddedcheez.vercel.app</span></div>
-            <img src="https://raw.githubusercontent.com/Rolexcode/shred/main/images/memes/original-shredded-banner.webp" referrerpolicy="no-referrer" alt="Shredded Cheez project preview" loading="lazy" />
-            <div class="project-open">Open live site ↗</div>
-          </div>
-          <div class="project-info">
-            <div><span class="project-type">MEMECOIN WEBSITE</span><h3>Shredded Cheez</h3></div>
-            <p>I gave the site a playable mini-game and meme wall, so there’s something to do after you land there — not just a CA and socials.</p>
-            <div class="project-tags"><span>Mini-game</span><span>Meme wall</span></div>
-          </div>
+        <a class="project reveal" href="https://shreddedcheez.vercel.app/" target="_blank" rel="noreferrer">
+          <div class="project-media"><img src="https://raw.githubusercontent.com/Rolexcode/shred/main/images/memes/original-shredded-banner.webp" alt="Shredded Cheez website preview" loading="lazy"><span class="live-pill">Live project</span></div>
+          <div class="project-copy"><span class="project-type">Memecoin website</span><h3>Shredded Cheez</h3><p>A project site with a playable mini-game and meme wall — something for visitors to actually do after they land there.</p><div class="project-tags"><span>Mini-game</span><span>Meme wall</span></div><div class="open-row"><span>shreddedcheez.vercel.app</span><b>Visit + play ↗</b></div></div>
         </a>
 
-        <a class="project-card reveal" href="https://shrek-mocha.vercel.app" target="_blank" rel="noreferrer">
-          <div class="project-preview">
-            <div class="browser-bar"><i></i><i></i><i></i><span>shrek-mocha.vercel.app</span></div>
-            <img src="https://raw.githubusercontent.com/Rolexcode/shrek/main/image.png" referrerpolicy="no-referrer" alt="Menace Shrek project preview" loading="lazy" />
-            <div class="project-open">Open live site ↗</div>
-          </div>
-          <div class="project-info">
-            <div><span class="project-type">SOLANA PROJECT WEBSITE</span><h3>Menace Shrek</h3></div>
-            <p>I built the website and also worked inside the Telegram as an admin, so I wasn’t guessing the project’s vibe from the outside.</p>
-            <div class="project-tags"><span>Website</span><span>Community admin</span></div>
-          </div>
+        <a class="project reveal" href="https://shrek-mocha.vercel.app" target="_blank" rel="noreferrer">
+          <div class="project-media"><img src="https://raw.githubusercontent.com/Rolexcode/shrek/main/image.png" alt="Menace Shrek website preview" loading="lazy"><span class="live-pill">Live project</span></div>
+          <div class="project-copy"><span class="project-type">Project website</span><h3>Menace Shrek</h3><p>I built the website and also worked inside the Telegram as an admin, so I understood the project from both sides.</p><div class="project-tags"><span>Website</span><span>Community admin</span></div><div class="open-row"><span>shrek-mocha.vercel.app</span><b>Open site ↗</b></div></div>
         </a>
       </div>
     </section>
 
-    <section class="section section-muted" id="community">
-      <div class="shell">
-        <header class="section-head reveal">
-          <span>COMMUNITY + MODERATION</span>
-          <div>
-            <h2>I’ve actually held the roles.</h2>
-            <p>Not communities I joined for a screenshot. These are roles I was given inside the Telegrams.</p>
+    <section class="section proof-section" id="community">
+      <div class="shell proof-layout">
+        <div class="proof-copy reveal">
+          <span class="section-label">02 / Community + moderation</span>
+          <h3>I’ve worked inside the communities too.</h3>
+          <p>These aren’t groups I joined just to take a screenshot. They’re actual roles I was given across project Telegrams.</p>
+          <div class="proof-points">
+            <div class="proof-point"><b>Moderator</b><span>Keep chat clean, answer questions and handle day-to-day issues.</span></div>
+            <div class="proof-point"><b>Admin</b><span>Help run the room, updates and community flow.</span></div>
+            <div class="proof-point"><b>Raider</b><span>Support coordinated visibility outside the Telegram.</span></div>
           </div>
-        </header>
-
-        <div class="role-grid">
-          <figure class="proof-card reveal" data-zoom="joe">
-            <img data-asset="joe" alt="Rolex shown as Mod Joe in Joe Community Chat" />
-            <figcaption><div><strong>Joe Community Chat</strong><span>300 members · Mod Joe</span></div><b>Tap to view ↗</b></figcaption>
-          </figure>
-          <figure class="proof-card reveal" data-zoom="menace">
-            <img data-asset="menace" alt="Rolex shown as Admin in Menace Shrek" />
-            <figcaption><div><strong>Menace Shrek</strong><span>Admin</span></div><b>Tap to view ↗</b></figcaption>
-          </figure>
-          <figure class="proof-card reveal" data-zoom="stakrr">
-            <img data-asset="stakrr" alt="Rolex shown as Raider in Stakrr" />
-            <figcaption><div><strong>Stakrr</strong><span>150 members · Raider</span></div><b>Tap to view ↗</b></figcaption>
-          </figure>
-          <figure class="proof-card reveal" data-zoom="robbie">
-            <img data-asset="robbie" alt="Rolex shown as Admin in Robbie Community CTO" />
-            <figcaption><div><strong>$ROBBIE Community CTO</strong><span>296 members · Admin</span></div><b>Tap to view ↗</b></figcaption>
-          </figure>
         </div>
-
-        <div class="service-notes reveal">
-          <div><span>COMMUNITY MANAGEMENT</span><p>Keep chat active, answer questions, post updates and pass useful feedback back to the team.</p></div>
-          <div><span>MODERATION</span><p>Deal with spam, scam links and bad actors while keeping the group comfortable enough for real conversation.</p></div>
+        <div class="reveal">
+          <a class="proof-sheet" href="./assets/proof/roles-hq.webp" target="_blank" rel="noreferrer">
+            <img src="./assets/proof/roles-hq.webp" alt="Rolex Telegram role proof showing moderator, admin and raider roles" loading="lazy">
+            <div class="proof-sheet-note"><span>Original Telegram proof · cropped for the relevant role</span><b>Open full size ↗</b></div>
+          </a>
         </div>
       </div>
     </section>
 
     <section class="section shell" id="raids">
       <header class="section-head reveal">
-        <span>RAIDS + SHILLING</span>
-        <div>
-          <h2>I can handle the push too.</h2>
-          <p>I’ve coordinated raids, worked the replies myself and been paid for the work. The screenshots below are the actual chats.</p>
-        </div>
+        <span class="section-label">03 / Raids + shilling</span>
+        <div class="section-title"><h2>When it’s time to push, I can handle that too.</h2><p>I’ve coordinated raids, worked the replies myself and been paid for the work. I keep replies varied and human instead of making ten accounts sound like one script.</p></div>
       </header>
-
-      <div class="raid-grid">
-        <figure class="raid-card reveal" data-zoom="lib_praise">
-          <img data-asset="lib_praise" alt="Telegram feedback saying good work and great job on raids" />
-          <figcaption><span>RAID FEEDBACK</span><strong>“Good work. Great job on raids.”</strong><b>Tap to view ↗</b></figcaption>
-        </figure>
-        <figure class="raid-card reveal" data-zoom="joe_feedback">
-          <img data-asset="joe_feedback" alt="Telegram feedback showing trust and saying the raid was very good" />
-          <figcaption><span>TRUST + EXECUTION</span><strong>“No need, I trust you.”</strong><b>Tap to view ↗</b></figcaption>
-        </figure>
-        <figure class="raid-card reveal" data-zoom="lib_payment">
-          <img data-asset="lib_payment" alt="Telegram conversation confirming payment after completed work" />
-          <figcaption><span>PAID WORK</span><strong>Work delivered. Payment received.</strong><b>Tap to view ↗</b></figcaption>
-        </figure>
-      </div>
-
-      <div class="plain-note reveal">
-        <strong>HOW I APPROACH RAIDS</strong>
-        <p>Keep replies varied, human and on-theme. The point is to get eyes on the project — not make the timeline look like ten accounts copied the same sentence.</p>
+      <div class="raid-block">
+        <a class="proof-sheet reveal" href="./assets/proof/feedback-hq.webp" target="_blank" rel="noreferrer">
+          <img src="./assets/proof/feedback-hq.webp" alt="Telegram raid feedback, trust and payment proof" loading="lazy">
+          <div class="proof-sheet-note"><span>Actual conversations</span><b>Open full size ↗</b></div>
+        </a>
+        <div class="quote-stack reveal">
+          <div class="quote"><small>Raid feedback</small><strong>“Good work. Great job on raids.”</strong></div>
+          <div class="quote"><small>Trust</small><strong>“No need, I trust you.”</strong><p>The work was handled without needing every step checked.</p></div>
+          <div class="quote"><small>Paid work</small><strong>Delivered. Paid. Asked back again.</strong><p>The receipts are right beside the copy — no invented metrics or fake testimonials.</p></div>
+        </div>
       </div>
     </section>
 
-    <section class="contact" id="contact">
-      <div class="shell contact-inner reveal">
-        <div>
-          <span>GOT A PROJECT?</span>
-          <h2>Send it over.</h2>
-          <p>Need the website done? Telegram needs hands? Need another mod or someone to run the raids? Show me the project and tell me what’s missing.</p>
-        </div>
-        <div class="contact-links">
-          <a href="https://t.me/rolexthexplorer" target="_blank" rel="noreferrer"><small>TELEGRAM</small><strong>@rolexthexplorer</strong><b>↗</b></a>
-          <a href="https://x.com/rolexthexplorer" target="_blank" rel="noreferrer"><small>X / TWITTER</small><strong>@rolexthexplorer</strong><b>↗</b></a>
-        </div>
+    <section class="contact shell" id="contact">
+      <div class="contact-card reveal">
+        <h2>Got a project?<br><span>Send it over.</span></h2>
+        <div class="contact-side"><p>Need the site built? Telegram needs hands? Need another mod, or someone to run the raids? Show me what you’re working on and tell me what’s missing.</p><div class="contact-links"><a href="https://t.me/rolexthexplorer" target="_blank" rel="noreferrer"><div><small>TELEGRAM</small><br><strong>@rolexthexplorer</strong></div><b>↗</b></a><a href="https://x.com/rolexthexplorer" target="_blank" rel="noreferrer"><div><small>X / TWITTER</small><br><strong>@rolexthexplorer</strong></div><b>↗</b></a></div></div>
       </div>
     </section>
   </main>
 
-  <footer class="footer shell">
-    <div class="identity"><img src="./assets/profile.jpg" alt="Rolex" /><span>Rolex</span></div>
-    <p>Websites · Community · Moderation · Raids & Shilling</p>
-    <a href="#top">Top ↑</a>
-  </footer>
+  <footer class="footer shell"><div class="identity"><img src="./assets/profile.jpg" alt="Rolex"><div><span>Rolex</span><small>@rolexthexplorer</small></div></div><span>Websites · Community · Moderation · Raids & Shilling</span><a href="#top">Back to top ↑</a></footer>
 
-  <dialog class="proof-lightbox" id="proof-lightbox">
-    <button type="button" class="lightbox-close" aria-label="Close screenshot">×</button>
-    <img id="lightbox-image" alt="Proof screenshot enlarged" />
-  </dialog>
-
-  <script src="./asset-joe.js"></script>
-  <script src="./asset-menace.js"></script>
-  <script src="./asset-stakrr.js"></script>
-  <script src="./asset-robbie.js"></script>
-  <script src="./asset-lib-praise.js"></script>
-  <script src="./asset-joe-feedback.js"></script>
-  <script src="./asset-lib-payment.js"></script>
-  <script src="./script.js"></script>
+  <script>
+    const observer=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.08});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
 </body>
 </html>
