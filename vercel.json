@@ -1,4 +1,20 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "functions": {
+    "api/*.js": {
+      "includeFiles": "asset-*.js"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/assets/proof/roles-hq.webp",
+      "destination": "/api/roles-proof"
+    },
+    {
+      "source": "/assets/proof/feedback-hq.webp",
+      "destination": "/api/feedback-proof"
+    }
+  ]
 }
