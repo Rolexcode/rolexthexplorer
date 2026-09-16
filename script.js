@@ -8,8 +8,8 @@ document.querySelectorAll('[data-asset]').forEach((img) => {
   }
 });
 
-// Project previews normally use raw GitHub assets. If that host fails on a
-// network, retry through GitHub's own raw route before giving up.
+// Project previews use real project artwork from the source repos. If the raw
+// host fails on a network, retry through GitHub's alternate raw route.
 document.querySelectorAll('.project-preview img').forEach((img) => {
   img.addEventListener('error', () => {
     if (img.dataset.fallbackTried === '1') return;
@@ -19,6 +19,32 @@ document.querySelectorAll('.project-preview img').forEach((img) => {
     img.dataset.fallbackTried = '1';
     img.src = `https://github.com/${match[1]}/${match[2]}/raw/refs/heads/main/${match[3]}`;
   });
+});
+
+const lightbox = document.getElementById('proof-lightbox');
+const lightboxImage = document.getElementById('lightbox-image');
+
+function openProof(key) {
+  if (!lightbox || !lightboxImage || !ASSETS[key]) return;
+  lightboxImage.src = ASSETS[key];
+  lightbox.showModal();
+}
+
+document.querySelectorAll('[data-zoom]').forEach((card) => {
+  card.addEventListener('click', () => openProof(card.dataset.zoom));
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('role', 'button');
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openProof(card.dataset.zoom);
+    }
+  });
+});
+
+document.querySelector('.lightbox-close')?.addEventListener('click', () => lightbox?.close());
+lightbox?.addEventListener('click', (event) => {
+  if (event.target === lightbox) lightbox.close();
 });
 
 const revealObserver = new IntersectionObserver((entries) => {
