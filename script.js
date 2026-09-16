@@ -1,116 +1,86 @@
-// Proof screenshots are stored in the repository as small JS data assets.
-// Load those verified assets first, then render them directly. This avoids the
-// malformed .webp files that previously caused broken images on the live site.
+// Load the verified screenshot assets already stored in this repository.
+// These are real JPEG data URLs and replace the malformed generated WebP files.
 const proofFiles = [
-  'asset-joe.js',
-  'asset-menace.js',
-  'asset-stakrr.js',
-  'asset-robbie.js',
-  'asset-joe-feedback.js',
-  'asset-lib-praise.js',
-  'asset-lib-payment.js'
+  'asset-joe.js','asset-menace.js','asset-stakrr.js','asset-robbie.js',
+  'asset-joe-feedback.js','asset-lib-praise.js','asset-lib-payment.js'
 ];
 
 function loadScript(src) {
   return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = `./${src}`;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
+    const s = document.createElement('script');
+    s.src = `./${src}?v=3`;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
   });
 }
 
-function proofImage(src, alt) {
+function makeImage(src, alt) {
   const img = document.createElement('img');
   img.src = src;
   img.alt = alt;
   img.loading = 'lazy';
   img.decoding = 'async';
-  img.style.width = '100%';
-  img.style.height = 'auto';
-  img.style.display = 'block';
-  img.style.borderRadius = '10px';
-  img.style.background = '#080809';
+  img.style.cssText = 'width:100%;height:auto;display:block;border-radius:10px;background:#080809';
   return img;
+}
+
+function makeLinkedImage(src, alt) {
+  const a = document.createElement('a');
+  a.href = src;
+  a.target = '_blank';
+  a.rel = 'noreferrer';
+  a.appendChild(makeImage(src, alt));
+  return a;
 }
 
 async function renderProof() {
   try {
     await Promise.all(proofFiles.map(loadScript));
-    const assets = window.PROOF_ASSETS || {};
+    const a = window.PROOF_ASSETS || {};
 
-    // Community section: show the actual role screenshots individually so the
-    // role labels remain readable instead of hiding them in a compressed collage.
-    const communitySheet = document.querySelector('#community .proof-sheet');
-    if (communitySheet) {
-      communitySheet.removeAttribute('href');
-      communitySheet.removeAttribute('target');
-      communitySheet.style.cursor = 'default';
-      communitySheet.innerHTML = '';
-
+    const community = document.querySelector('#community .proof-sheet');
+    if (community) {
+      community.removeAttribute('href');
+      community.removeAttribute('target');
+      community.style.cursor = 'default';
+      community.innerHTML = '';
       const grid = document.createElement('div');
-      grid.style.display = 'grid';
-      grid.style.gridTemplateColumns = 'repeat(2,minmax(0,1fr))';
-      grid.style.gap = '8px';
-
+      grid.style.cssText = 'display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px';
       [
-        ['joe', 'Joe Community Chat — Rolex moderator role'],
-        ['menace', 'Menace Shrek — Rolex admin role'],
-        ['stakrr', 'Stakrr — Rolex raider role'],
-        ['robbie', '$ROBBIE Community CTO — Rolex admin role']
-      ].forEach(([key, alt]) => {
-        if (!assets[key]) return;
-        const link = document.createElement('a');
-        link.href = assets[key];
-        link.target = '_blank';
-        link.rel = 'noreferrer';
-        link.appendChild(proofImage(assets[key], alt));
-        grid.appendChild(link);
-      });
-
-      communitySheet.appendChild(grid);
+        ['joe','Joe Community Chat — Rolex moderator role'],
+        ['menace','Menace Shrek — Rolex admin role'],
+        ['stakrr','Stakrr — Rolex raider role'],
+        ['robbie','$ROBBIE Community CTO — Rolex admin role']
+      ].forEach(([key,alt]) => { if (a[key]) grid.appendChild(makeLinkedImage(a[key],alt)); });
+      community.appendChild(grid);
       const note = document.createElement('div');
       note.className = 'proof-sheet-note';
       note.innerHTML = '<span>Actual Telegram roles</span><b>Tap any screenshot ↗</b>';
-      communitySheet.appendChild(note);
+      community.appendChild(note);
     }
 
-    // Raid section: show all three actual conversations — feedback, trust and
-    // payment — rather than pointing at the broken generated WebP.
-    const raidSheet = document.querySelector('#raids .proof-sheet');
-    if (raidSheet) {
-      raidSheet.removeAttribute('href');
-      raidSheet.removeAttribute('target');
-      raidSheet.style.cursor = 'default';
-      raidSheet.innerHTML = '';
-
+    const raids = document.querySelector('#raids .proof-sheet');
+    if (raids) {
+      raids.removeAttribute('href');
+      raids.removeAttribute('target');
+      raids.style.cursor = 'default';
+      raids.innerHTML = '';
       const stack = document.createElement('div');
-      stack.style.display = 'grid';
-      stack.style.gap = '8px';
-
+      stack.style.cssText = 'display:grid;gap:8px';
       [
-        ['joeFeedback', 'Telegram feedback confirming the raid was very good'],
-        ['libPraise', 'Telegram feedback saying good work and great job on raids'],
-        ['libPayment', 'Telegram conversation confirming payment after completed raid work']
-      ].forEach(([key, alt]) => {
-        if (!assets[key]) return;
-        const link = document.createElement('a');
-        link.href = assets[key];
-        link.target = '_blank';
-        link.rel = 'noreferrer';
-        link.appendChild(proofImage(assets[key], alt));
-        stack.appendChild(link);
-      });
-
-      raidSheet.appendChild(stack);
+        ['joe_feedback','Telegram feedback confirming the raid was very good'],
+        ['lib_praise','Telegram feedback saying good work and great job on raids'],
+        ['lib_payment','Telegram conversation confirming payment after completed raid work']
+      ].forEach(([key,alt]) => { if (a[key]) stack.appendChild(makeLinkedImage(a[key],alt)); });
+      raids.appendChild(stack);
       const note = document.createElement('div');
       note.className = 'proof-sheet-note';
       note.innerHTML = '<span>Actual conversations</span><b>Tap any screenshot ↗</b>';
-      raidSheet.appendChild(note);
+      raids.appendChild(note);
     }
-  } catch (error) {
-    console.error('Could not load proof screenshots', error);
+  } catch (err) {
+    console.error('Proof screenshots failed to load', err);
   }
 }
 
@@ -123,5 +93,4 @@ const revealObserver = new IntersectionObserver((entries) => {
     revealObserver.unobserve(entry.target);
   });
 }, { threshold: 0.1 });
-
 document.querySelectorAll('.reveal').forEach((node) => revealObserver.observe(node));
