@@ -2,8 +2,18 @@ const lightbox = document.getElementById('proof-lightbox');
 const lightboxImage = document.getElementById('lightbox-image');
 const lightboxClose = lightbox?.querySelector('.lightbox-close');
 
+const proofCropPositions = {
+  joe: 'center 70%',
+  menace: 'center 61%',
+  stakrr: 'center 48%',
+  robbie: 'center 67%',
+  lib_praise: 'center 22%',
+  joe_feedback: 'center 61%',
+  lib_payment: 'center 78%'
+};
+
 // Use the real original screenshots for both the card crop and the full lightbox view.
-// CSS handles the in-card crop; the lightbox shows the untouched full image.
+// CSS controls the card height; this only positions the crop around the useful proof.
 document.querySelectorAll('[data-zoom]').forEach((card) => {
   const img = card.querySelector('img');
   if (!img) return;
@@ -14,10 +24,11 @@ document.querySelectorAll('[data-zoom]').forEach((card) => {
   } catch (_) {}
 
   if (key) {
-    const original = `/api/proof?key=${encodeURIComponent(key)}&v=8`;
+    const original = `/api/proof?key=${encodeURIComponent(key)}&v=9`;
     img.dataset.fullSrc = original;
     img.src = original;
-    img.removeAttribute('style');
+    img.style.objectFit = 'cover';
+    img.style.objectPosition = proofCropPositions[key] || 'center';
   }
 
   const open = () => {
