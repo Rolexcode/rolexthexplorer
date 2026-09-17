@@ -2,13 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 const FILES = {
-  joe: 'asset-joe.js',
-  menace: 'asset-menace.js',
-  stakrr: 'asset-stakrr.js',
-  robbie: 'asset-robbie.js',
-  lib_praise: 'asset-lib-praise.js',
-  joe_feedback: 'asset-joe-feedback.js',
-  lib_payment: 'asset-lib-payment.js'
+  joe: '1003230269.jpg',
+  menace: '1003230270.jpg',
+  stakrr: '1003230281.jpg',
+  robbie: '1003230292.jpg',
+  joe_feedback: '1003230296.jpg',
+  lib_payment: '1003230299.jpg',
+  lib_praise: '1003230307.jpg'
 };
 
 module.exports = (req, res) => {
@@ -21,15 +21,9 @@ module.exports = (req, res) => {
   }
 
   try {
-    const source = fs.readFileSync(path.join(process.cwd(), file), 'utf8');
-    const match = source.match(/data:image\/jpeg;base64,([^\"]+)/);
-
-    if (!match) {
-      res.status(500).send('Proof image data missing');
-      return;
-    }
-
-    const image = Buffer.from(match[1], 'base64');
+    const image = fs.readFileSync(
+      path.join(process.cwd(), 'assets', 'proof-originals', file)
+    );
 
     if (image.length < 4 || image[0] !== 0xff || image[1] !== 0xd8) {
       res.status(500).send('Invalid JPEG data');
