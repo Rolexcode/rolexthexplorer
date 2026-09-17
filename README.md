@@ -1,29 +1,23 @@
-# Rolex — Web3 Websites & Operations
+# Rolex — Web3 Operator
 
-A focused work portfolio for Web3 founders and developers.
+A portfolio of my Web3 project work across websites, community management, moderation, and raids.
 
-The portfolio leads with the part of my work that is easiest to judge on sight: **websites I have built for Web3 projects**. Community management, moderation and raid coordination are backed by original Telegram role and feedback screenshots inside the site.
+## Live
 
-## Featured builds
+https://rolexthexplorer.vercel.app/
 
-- **Holding The Floor** — project website with an image meme generator
-- **PeePee** — PFP Lab + Meme Lab for generating community-ready images
-- **Shredded Cheez** — branded meme-project website with a playable mini-game
-- **Menace Shrek** — project website plus direct community-admin experience
+## Featured websites
 
-Each featured case study links to its GitHub repository as the stable source of proof. Old deployment aliases are intentionally not used here.
+- Holding The Floor
+- PeePee
+- Shredded Cheez
+- Menace Shrek
 
-## Other proof
+## Community work
 
-- Moderator, admin and raider roles in Telegram communities
-- Direct raid feedback and trust from project leads
-- Completed paid raid work
-- Product-level Web3 development through projects such as SolIdentity
+The site includes original Telegram screenshots showing moderator, admin, raider, raid-feedback, trust, and paid-work proof.
 
 ## Contact
 
-- Telegram: [@rolexthexplorer](https://t.me/rolexthexplorer)
-- X: [@rolexthexplorer](https://x.com/rolexthexplorer)
-- GitHub: [Rolexcode](https://github.com/Rolexcode)
-
-Live portfolio: **https://rolexthexplorer.vercel.app/**
+- Telegram: https://t.me/rolexthexplorer
+- X: https://x.com/rolexthexplorer
