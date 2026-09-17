@@ -2,8 +2,8 @@ const lightbox = document.getElementById('proof-lightbox');
 const lightboxImage = document.getElementById('lightbox-image');
 const lightboxClose = lightbox?.querySelector('.lightbox-close');
 
-// Swap the in-page proof images to sharp crops made from the original screenshots.
-// The full screenshot remains available in the lightbox.
+// Use the real original screenshots for both the card crop and the full lightbox view.
+// CSS handles the in-card crop; the lightbox shows the untouched full image.
 document.querySelectorAll('[data-zoom]').forEach((card) => {
   const img = card.querySelector('img');
   if (!img) return;
@@ -14,14 +14,11 @@ document.querySelectorAll('[data-zoom]').forEach((card) => {
   } catch (_) {}
 
   if (key) {
-    img.dataset.fullSrc = `/api/proof?key=${encodeURIComponent(key)}&v=6`;
-    img.src = `/api/proof-preview?key=${encodeURIComponent(key)}&v=7`;
+    const original = `/api/proof?key=${encodeURIComponent(key)}&v=8`;
+    img.dataset.fullSrc = original;
+    img.src = original;
+    img.removeAttribute('style');
   }
-
-  // The preview files are already cropped deliberately. Do not crop them again in CSS.
-  img.style.height = 'auto';
-  img.style.objectFit = 'contain';
-  img.style.objectPosition = 'center';
 
   const open = () => {
     if (!lightbox || !lightboxImage) return;
