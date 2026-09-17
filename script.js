@@ -2,19 +2,38 @@ const lightbox = document.getElementById('proof-lightbox');
 const lightboxImage = document.getElementById('lightbox-image');
 const lightboxClose = lightbox?.querySelector('.lightbox-close');
 
-// Proof cards show a cropped preview in the page, but open the untouched full image.
+// Swap the in-page proof images to sharp crops made from the original screenshots.
+// The full screenshot remains available in the lightbox.
 document.querySelectorAll('[data-zoom]').forEach((card) => {
-  const open = () => {
-    const img = card.querySelector('img');
-    if (!img || !lightbox || !lightboxImage) return;
+  const img = card.querySelector('img');
+  if (!img) return;
 
-    lightboxImage.src = img.currentSrc || img.src;
+  let key = '';
+  try {
+    key = new URL(img.getAttribute('src'), window.location.origin).searchParams.get('key') || '';
+  } catch (_) {}
+
+  if (key) {
+    img.dataset.fullSrc = `/api/proof?key=${encodeURIComponent(key)}&v=6`;
+    img.src = `/api/proof-preview?key=${encodeURIComponent(key)}&v=7`;
+  }
+
+  // The preview files are already cropped deliberately. Do not crop them again in CSS.
+  img.style.height = 'auto';
+  img.style.objectFit = 'contain';
+  img.style.objectPosition = 'center';
+
+  const open = () => {
+    if (!lightbox || !lightboxImage) return;
+    const fullSrc = img.dataset.fullSrc || img.currentSrc || img.src;
+
+    lightboxImage.src = fullSrc;
     lightboxImage.alt = img.alt || 'Proof screenshot';
 
     if (typeof lightbox.showModal === 'function') {
       lightbox.showModal();
     } else {
-      window.open(img.currentSrc || img.src, '_blank', 'noopener,noreferrer');
+      window.open(fullSrc, '_blank', 'noopener,noreferrer');
     }
   };
 
