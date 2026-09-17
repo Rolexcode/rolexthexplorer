@@ -1,3 +1,5 @@
+document.title = 'Rolex — Websites, Community & Raids';
+
 const lightbox = document.getElementById('proof-lightbox');
 const lightboxImage = document.getElementById('lightbox-image');
 const lightboxClose = lightbox?.querySelector('.lightbox-close');
@@ -74,7 +76,7 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('.reveal').forEach((node) => node.classList.add('visible'));
 }
 
-// Section-aware reading meter. Desktop uses a vertical rail; mobile turns it into a bottom capsule.
+// Section-aware reading meter. Desktop uses a vertical rail; mobile turns it into a thin edge rail.
 const progressFrame = document.querySelector('.scroll-progress');
 const progress = document.getElementById('scroll-progress');
 let progressRaf = 0;
@@ -98,7 +100,7 @@ window.addEventListener('scroll', requestProgress, { passive: true });
 window.addEventListener('resize', requestProgress);
 updateProgress();
 
-// Keep navigation, ambience and meter label synced to the section in view.
+// Keep navigation and meter label synced to the section in view.
 const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
 const observedSections = navLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
@@ -126,7 +128,7 @@ if ('IntersectionObserver' in window && observedSections.length) {
   observedSections.forEach((section) => sectionObserver.observe(section));
 }
 
-// Pointer-only depth and spotlight. Touch devices stay completely clean.
+// Pointer-only depth. Touch devices stay clean.
 const pointerFine = window.matchMedia('(pointer:fine)').matches;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -142,7 +144,7 @@ if (pointerFine) {
       if (!reducedMotion && card.hasAttribute('data-tilt')) {
         const x = px / 100 - 0.5;
         const y = py / 100 - 0.5;
-        card.style.transform = `perspective(1100px) rotateX(${y * -2.2}deg) rotateY(${x * 2.2}deg) translateY(-2px)`;
+        card.style.transform = `perspective(1100px) rotateX(${y * -1.4}deg) rotateY(${x * 1.4}deg) translateY(-1px)`;
       }
     });
 
