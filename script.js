@@ -1,96 +1,79 @@
-// Load the verified screenshot assets already stored in this repository.
-// These are real JPEG data URLs and replace the malformed generated WebP files.
-const proofFiles = [
-  'asset-joe.js','asset-menace.js','asset-stakrr.js','asset-robbie.js',
-  'asset-joe-feedback.js','asset-lib-praise.js','asset-lib-payment.js'
-];
+// Proof screenshot assets are loaded by the asset-*.js files before this script.
+// Each asset file adds a real JPEG data URL to window.PROOF_ASSETS.
+const proofAssets = window.PROOF_ASSETS || {};
 
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = `./${src}?v=3`;
-    s.onload = resolve;
-    s.onerror = reject;
-    document.head.appendChild(s);
-  });
-}
+// Attach each real screenshot to the matching <img data-asset="...">.
+document.querySelectorAll('img[data-asset]').forEach((img) => {
+  const key = img.dataset.asset;
+  const src = proofAssets[key];
 
-function makeImage(src, alt) {
-  const img = document.createElement('img');
+  if (!src) {
+    console.error(`Missing proof asset: ${key}`);
+    return;
+  }
+
   img.src = src;
-  img.alt = alt;
   img.loading = 'lazy';
   img.decoding = 'async';
-  img.style.cssText = 'width:100%;height:auto;display:block;border-radius:10px;background:#080809';
-  return img;
-}
+});
 
-function makeLinkedImage(src, alt) {
-  const a = document.createElement('a');
-  a.href = src;
-  a.target = '_blank';
-  a.rel = 'noreferrer';
-  a.appendChild(makeImage(src, alt));
-  return a;
-}
+// Proof lightbox.
+const lightbox = document.getElementById('proof-lightbox');
+const lightboxImage = document.getElementById('lightbox-image');
+const lightboxClose = lightbox?.querySelector('.lightbox-close');
 
-async function renderProof() {
-  try {
-    await Promise.all(proofFiles.map(loadScript));
-    const a = window.PROOF_ASSETS || {};
+function openProof(key, alt = 'Proof screenshot') {
+  const src = proofAssets[key];
+  if (!src || !lightbox || !lightboxImage) return;
 
-    const community = document.querySelector('#community .proof-sheet');
-    if (community) {
-      community.removeAttribute('href');
-      community.removeAttribute('target');
-      community.style.cursor = 'default';
-      community.innerHTML = '';
-      const grid = document.createElement('div');
-      grid.style.cssText = 'display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px';
-      [
-        ['joe','Joe Community Chat — Rolex moderator role'],
-        ['menace','Menace Shrek — Rolex admin role'],
-        ['stakrr','Stakrr — Rolex raider role'],
-        ['robbie','$ROBBIE Community CTO — Rolex admin role']
-      ].forEach(([key,alt]) => { if (a[key]) grid.appendChild(makeLinkedImage(a[key],alt)); });
-      community.appendChild(grid);
-      const note = document.createElement('div');
-      note.className = 'proof-sheet-note';
-      note.innerHTML = '<span>Actual Telegram roles</span><b>Tap any screenshot ↗</b>';
-      community.appendChild(note);
-    }
+  lightboxImage.src = src;
+  lightboxImage.alt = alt;
 
-    const raids = document.querySelector('#raids .proof-sheet');
-    if (raids) {
-      raids.removeAttribute('href');
-      raids.removeAttribute('target');
-      raids.style.cursor = 'default';
-      raids.innerHTML = '';
-      const stack = document.createElement('div');
-      stack.style.cssText = 'display:grid;gap:8px';
-      [
-        ['joe_feedback','Telegram feedback confirming the raid was very good'],
-        ['lib_praise','Telegram feedback saying good work and great job on raids'],
-        ['lib_payment','Telegram conversation confirming payment after completed raid work']
-      ].forEach(([key,alt]) => { if (a[key]) stack.appendChild(makeLinkedImage(a[key],alt)); });
-      raids.appendChild(stack);
-      const note = document.createElement('div');
-      note.className = 'proof-sheet-note';
-      note.innerHTML = '<span>Actual conversations</span><b>Tap any screenshot ↗</b>';
-      raids.appendChild(note);
-    }
-  } catch (err) {
-    console.error('Proof screenshots failed to load', err);
+  if (typeof lightbox.showModal === 'function') {
+    lightbox.showModal();
+  } else {
+    window.open(src, '_blank', 'noopener,noreferrer');
   }
 }
 
-renderProof();
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    entry.target.classList.add('visible');
-    revealObserver.unobserve(entry.target);
+document.querySelectorAll('[data-zoom]').forEach((card) => {
+  card.addEventListener('click', () => {
+    const img = card.querySelector('img');
+    openProof(card.dataset.zoom, img?.alt || 'Proof screenshot');
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach((node) => revealObserver.observe(node));
+
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      const img = card.querySelector('img');
+      openProof(card.dataset.zoom, img?.alt || 'Proof screenshot');
+    }
+  });
+
+  card.tabIndex = 0;
+  card.setAttribute('role', 'button');
+});
+
+lightboxClose?.addEventListener('click', () => lightbox.close());
+lightbox?.addEventListener('click', (event) => {
+  if (event.target === lightbox) lightbox.close();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && lightbox?.open) lightbox.close();
+});
+
+// Reveal animation.
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach((node) => revealObserver.observe(node));
+} else {
+  document.querySelectorAll('.reveal').forEach((node) => node.classList.add('visible'));
+}
