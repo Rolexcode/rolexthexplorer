@@ -12,8 +12,7 @@ const proofCropPositions = {
   lib_payment: 'center 78%'
 };
 
-// Use the real original screenshots for both the card crop and the full lightbox view.
-// CSS controls the card height; this only positions the crop around the useful proof.
+// Original proof images stay untouched; only the card viewport is cropped.
 document.querySelectorAll('[data-zoom]').forEach((card) => {
   const img = card.querySelector('img');
   if (!img) return;
@@ -34,15 +33,11 @@ document.querySelectorAll('[data-zoom]').forEach((card) => {
   const open = () => {
     if (!lightbox || !lightboxImage) return;
     const fullSrc = img.dataset.fullSrc || img.currentSrc || img.src;
-
     lightboxImage.src = fullSrc;
     lightboxImage.alt = img.alt || 'Proof screenshot';
 
-    if (typeof lightbox.showModal === 'function') {
-      lightbox.showModal();
-    } else {
-      window.open(fullSrc, '_blank', 'noopener,noreferrer');
-    }
+    if (typeof lightbox.showModal === 'function') lightbox.showModal();
+    else window.open(fullSrc, '_blank', 'noopener,noreferrer');
   };
 
   card.addEventListener('click', open);
@@ -64,7 +59,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && lightbox?.open) lightbox.close();
 });
 
-// Section reveal.
+// Reveal content once, then leave it alone.
 if ('IntersectionObserver' in window) {
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -79,50 +74,82 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('.reveal').forEach((node) => node.classList.add('visible'));
 }
 
-// Reading progress gives the page a quiet sense of movement without a marquee.
+// Section-aware reading meter. Desktop uses a vertical rail; mobile turns it into a bottom capsule.
+const progressFrame = document.querySelector('.scroll-progress');
 const progress = document.getElementById('scroll-progress');
+let progressRaf = 0;
+
 const updateProgress = () => {
-  if (!progress) return;
+  progressRaf = 0;
   const max = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-  progress.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+  const ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+  const pct = Math.round(ratio * 100);
+
+  document.documentElement.style.setProperty('--page-progress', ratio.toFixed(4));
+  if (progress) progress.dataset.progress = `${String(pct).padStart(2, '0')}%`;
+  if (progressFrame && ratio < 0.035) progressFrame.dataset.section = 'INTRO';
 };
-window.addEventListener('scroll', updateProgress, { passive: true });
-window.addEventListener('resize', updateProgress);
+
+const requestProgress = () => {
+  if (!progressRaf) progressRaf = requestAnimationFrame(updateProgress);
+};
+
+window.addEventListener('scroll', requestProgress, { passive: true });
+window.addEventListener('resize', requestProgress);
 updateProgress();
 
-// Keep the nav oriented to where the visitor is in the story.
+// Keep navigation, ambience and meter label synced to the section in view.
 const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
 const observedSections = navLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
   .filter(Boolean);
+
+const setActiveSection = (id) => {
+  const section = id || 'intro';
+  document.body.dataset.section = section;
+  if (progressFrame) progressFrame.dataset.section = section.toUpperCase();
+  navLinks.forEach((link) => {
+    link.classList.toggle('active', link.getAttribute('href') === `#${section}`);
+  });
+};
+
+setActiveSection('intro');
 
 if ('IntersectionObserver' in window && observedSections.length) {
   const sectionObserver = new IntersectionObserver((entries) => {
     const visible = entries
       .filter((entry) => entry.isIntersecting)
       .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!visible) return;
-    navLinks.forEach((link) => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`);
-    });
-  }, { rootMargin: '-35% 0px -50%', threshold: [0, 0.1, 0.35] });
+    if (visible) setActiveSection(visible.target.id);
+  }, { rootMargin: '-34% 0px -48%', threshold: [0, 0.12, 0.35, 0.6] });
+
   observedSections.forEach((section) => sectionObserver.observe(section));
 }
 
-// Tiny perspective response on pointer devices. No effect on touch screens.
-if (window.matchMedia('(pointer:fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('[data-tilt]').forEach((card) => {
+// Pointer-only depth and spotlight. Touch devices stay completely clean.
+const pointerFine = window.matchMedia('(pointer:fine)').matches;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (pointerFine) {
+  document.querySelectorAll('[data-tilt], .work-card, .proof-card, .raid-card').forEach((card) => {
     card.addEventListener('pointermove', (event) => {
       const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      const rx = y * -2.4;
-      const ry = x * 2.4;
-      card.style.transform = `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+      const px = ((event.clientX - rect.left) / rect.width) * 100;
+      const py = ((event.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--spot-x', `${px}%`);
+      card.style.setProperty('--spot-y', `${py}%`);
+
+      if (!reducedMotion && card.hasAttribute('data-tilt')) {
+        const x = px / 100 - 0.5;
+        const y = py / 100 - 0.5;
+        card.style.transform = `perspective(1100px) rotateX(${y * -2.2}deg) rotateY(${x * 2.2}deg) translateY(-2px)`;
+      }
     });
+
     card.addEventListener('pointerleave', () => {
-      card.style.transform = '';
+      card.style.removeProperty('--spot-x');
+      card.style.removeProperty('--spot-y');
+      if (card.hasAttribute('data-tilt')) card.style.transform = '';
     });
   });
 }
