@@ -254,18 +254,18 @@ main,.site-header,.capability-rail,.story-section,.contact{max-width:100%}
   color:#99978f;
 }
 .work-stack>.work-card:nth-child(3){margin-top:42px}
-.work-stack>.work-card:nth-child(4){
+.work-stack>.work-card:nth-child(5){
   grid-column:1/-1;
   display:grid;
   grid-template-columns:.78fr 1.22fr;
   margin-top:18px;
 }
-.work-stack>.work-card:nth-child(4) .work-copy{
+.work-stack>.work-card:nth-child(5) .work-copy{
   order:-1;
   border-top:0;
   border-right:1px solid #292c27;
 }
-.work-stack>.work-card:nth-child(4) .work-visual>img{height:570px}
+.work-stack>.work-card:nth-child(5) .work-visual>img{height:570px}
 
 /* Community proof — warm charcoal + print-like caption strips. */
 .light-zone{
@@ -427,7 +427,7 @@ main,.site-header,.capability-rail,.story-section,.contact{max-width:100%}
 @media(max-width:980px){
   .scroll-progress{right:7px;height:170px}
   .operator-card,.work-card,.proof-card,.raid-card{border-radius:2px}
-  .work-stack>.work-card:nth-child(4){grid-template-columns:1fr 1fr}
+  .work-stack>.work-card:nth-child(5){grid-template-columns:1fr 1fr}
 }
 
 @media(max-width:700px){
@@ -497,12 +497,12 @@ main,.site-header,.capability-rail,.story-section,.contact{max-width:100%}
 
   .browser-bar{height:30px}
   .work-card-wide .work-copy{border-left:0}
-  .work-visual>img,.work-card-wide .work-visual>img,.work-stack>.work-card:nth-child(4) .work-visual>img{height:310px}
+  .work-visual>img,.work-card-wide .work-visual>img,.work-stack>.work-card:nth-child(5) .work-visual>img{height:310px}
   .work-copy{min-height:0;padding:22px}
   .work-copy h3{font-size:34px}
   .work-stack>.work-card:nth-child(3){margin-top:0}
-  .work-stack>.work-card:nth-child(4){display:block;margin-top:0}
-  .work-stack>.work-card:nth-child(4) .work-copy{order:initial;border-right:0;border-top:1px solid #292c27}
+  .work-stack>.work-card:nth-child(5){display:block;margin-top:0}
+  .work-stack>.work-card:nth-child(5) .work-copy{order:initial;border-right:0;border-top:1px solid #292c27}
 
   .story-section{padding-top:92px;padding-bottom:92px}
   .story-head{margin-bottom:48px}
