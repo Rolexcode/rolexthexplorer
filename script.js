@@ -1,4 +1,4 @@
-document.title = 'Rolex — Websites, Community & Raids';
+document.title = 'Rolex | I build the site, then manage the community';
 
 const lightbox = document.getElementById('proof-lightbox');
 const lightboxImage = document.getElementById('lightbox-image');
